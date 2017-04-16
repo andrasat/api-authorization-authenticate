@@ -1,0 +1,27 @@
+{
+  "name": "api-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/andrasat/api-authorization-authenticate.git"
+  },
+  "author": "andrasat <andra.satria1@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrasat/api-authorization-authenticate/issues"
+  },
+  "homepage": "https://github.com/andrasat/api-authorization-authenticate#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.9.4",
+    "password-hash": "^1.2.2"
+  }
+}
