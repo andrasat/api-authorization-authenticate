@@ -16,8 +16,10 @@ module.exports = {
       password: pwd
     }).save((err)=> {
       if(err) {
-        res.send(err)
+        console.log('register failed')
+        res.status(400).send(err)
       } else {
+        console.log('register done')
         res.send('Register Success')
       }
     })
@@ -29,8 +31,10 @@ module.exports = {
   listUser: (req,res)=> {
     User.find({}, (err, users)=> {
       if(err) {
-        res.send(err)
+        console.log('login failed')
+        res.status(400).send(err)
       } else {
+        console.log('login done')
         res.send(users)
       }
     })
@@ -40,8 +44,10 @@ module.exports = {
       email: req.body.email
     }, {new: true}, (err, user)=> {
       if(err) {
-        res.send(err)
+        console.log('edit failed')
+        res.status(400).send(err)
       } else {
+        console.log('edit done')
         res.send(user)
       }
     })
@@ -49,8 +55,10 @@ module.exports = {
   deleteUser: (req,res)=> {
     User.findByIdAndRemove(req.params.id, (err, user)=> {
       if(err) {
-        res.send(err)
+        console.log('delete failed')
+        res.status(400).send(err)
       } else {
+        console.log('delete done')
         res.send(user)
       }
     })
