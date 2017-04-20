@@ -10,8 +10,8 @@ let userSchema = new Schema({
 })
 
 userSchema.path('email').validate((email)=> {
-  let regex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
-  return regex.test(email.text)
+  let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return regex.test(email)
 }, 'Invalid email format')
 
 const User = mongoose.model('User', userSchema)

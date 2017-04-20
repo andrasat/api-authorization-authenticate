@@ -6,35 +6,33 @@ require('dotenv').config()
 module.exports = {
 
   register: (req,res)=> {
-    let saltRounds = 10,
-        pwd
+    let saltRounds = 10
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-      pwd = hash
-    })
-    new User({
-      email: req.body.email,
-      password: pwd
-    }).save((err)=> {
-      if(err) {
-        console.log('register failed')
-        res.status(400).send(err)
-      } else {
-        console.log('register done')
-        res.send('Register Success')
-      }
+      new User({
+        email: req.body.email,
+        password: hash,
+        isAdmin: req.body.isAdmin
+      }).save((err)=> {
+        if(err) {
+          console.log('register failed')
+          res.status(400).send(err)
+        } else {
+          console.log('register done')
+          res.send('Register Success')
+        }
+      })
     })
   },
   login: (req,res)=> {
+    console.log('login done')
     let token = jwt.sign({email: req.user.email, isAdmin: req.user.isAdmin}, process.env.SECRET)
-    res.send(token)
+    res.send({'token': token, isAdmin: req.user.isAdmin})
   },
   listUser: (req,res)=> {
     User.find({}, (err, users)=> {
       if(err) {
-        console.log('login failed')
         res.status(400).send(err)
       } else {
-        console.log('login done')
         res.send(users)
       }
     })

@@ -15,7 +15,7 @@
         </p>
       </div>
       <div class="field is-grouped">
-        <p class="control button is-primary">Submit</p>
+        <p class="control button is-primary" @click="login()">Submit</p>
         <router-link to="/register" class="control button outlined">or Register</router-link>
       </div>
     </div>
@@ -62,10 +62,13 @@ export default {
         password: self.password
       })
         .then((res)=> {
+          localStorage.setItem('token', res.data.token)
+          localStorage.setItem('isAdmin', res.data.isAdmin)
           self.setSuccess(true)
           setTimeout(()=> {
             self.setSuccess(false)
-            self.$route.push('/list')
+            self.$router.push('/list')
+            window.location.reload()
           }, 2500)
         })
         .catch((err)=> {

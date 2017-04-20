@@ -2,6 +2,12 @@
 export const state = {
   isSuccess : false,
   isError : false,
+  loggedUser: localStorage.getItem('token') || null,
+  isUserAdmin: localStorage.getItem('isAdmin') || null,
+  modalClass: {
+    'modal': true,
+    'is-active': false
+  }
 }
 
 export const getters = {
@@ -10,6 +16,15 @@ export const getters = {
   },
   getError(state) {
     return state.isError
+  },
+  getIsUserAdmin(state) {
+    return state.isUserAdmin
+  },
+  getLoggedUser(state) {
+    return state.loggedUser
+  },
+  getModalClass(state) {
+    return state.modalClass
   }
 }
 
@@ -19,6 +34,12 @@ export const mutations = {
   },
   SET_ISERROR(state, value) {
     state.isError = value
+  },
+  SET_MODALACTIVE(state) {
+    state.modalClass['is-active'] = true
+  },
+  SET_MODALINACTIVE(state) {
+    state.modalClass['is-active'] = false
   }
 }
 
@@ -28,5 +49,11 @@ export const actions = {
   },
   setError({commit}, value) {
     commit('SET_ISERROR', value)
+  },
+  setModalActive({commit}) {
+    commit('SET_MODALACTIVE')
+  },
+  setModalInactive({commit}) {
+    commit('SET_MODALINACTIVE')
   }
 }
